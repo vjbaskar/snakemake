@@ -1,0 +1,58 @@
+{
+    "__default__" :
+    {
+        "queue"     : "small",
+        "nCPUs"     : "1",
+        "memory"    : 8000,
+        "resources" : "\"select[mem>8000] rusage[mem=8000] span[hosts=1]\"",
+        "name"      : "{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+    },
+
+
+    "align" :
+    {
+        "queue"     : "normal",
+        "nCPUs"     : "1",
+        "memory"    : 2000,
+        "resources" : "\"select[mem>2000] rusage[mem=2000] span[hosts=1]\"",
+        "name"      : "{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+    },
+        
+    "sortbam" :
+    {
+        "queue"     : "normal",
+        "nCPUs"     : "1",
+        "memory"    : 8000,
+        "resources" : "\"select[mem>8000] rusage[mem=8000] span[hosts=1]\"",
+        "name"      : "{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+    },
+    
+    "download_fa" :
+    {
+        "queue"     : "small",
+        "nCPUs"     : "1",
+        "memory"    : 500,
+        "resources" : "\"select[mem>500] rusage[mem=500] span[hosts=1]\"",
+        "name"      : "{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+    },
+    
+    "collatecrams" :
+    {
+        "queue"     : "normal",
+        "nCPUs"     : "1",
+        "memory"    : 2000,
+        "resources" : "\"select[mem>2000] rusage[mem=2000] span[hosts=1]\"",
+        "name"      : "{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+    }
+
+}
