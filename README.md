@@ -12,17 +12,8 @@
    * `config/smk.yaml`: main config file for snakemake
    * `config/lsf.json`: cluster config file for LSF
 
-## Input:
-    
-    Set of sample names. 
-    fastq/{sample_name}.pair1.fq.gz, fastq/{sample_name}.pair2.fq.gz
-
-## Indexing.
-    
-    config/smk.yaml contains the genome name that you should change.
-    This `config['genome']` is called in `Snakefile`
-    The genome will be downloaded to refs from ucsc genome browser and indexed using bwa
-
-## Align.
-
-    
+## Scripts:
+   * The main script is Snakemake
+   * The individual workflows are written in workflow/*
+   * Python functions to be imported are in scripts/*
+   * Example run is given in snakemake.sh
