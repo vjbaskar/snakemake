@@ -1,5 +1,5 @@
 jobs: 999
-cluster: "bsub -M {resource.memory} -R \"select[mem>resource.memory] rusage[mem=resource.memory] span[hosts=resource.nhosts]\" -o {rule}.{wildcards.sample}.cluster -e {rule}.{wildcards.sample}.cluster -J {rule}.{wildcards.sample} -q normal -n {resource.cores} "
+cluster: "bsub -M {resources.memory} -R \"select[mem>{resources.memory}] rusage[mem={resources.memory}] span[hosts={resources.cpus}]\" -o logs/{rule}.{wildcards}.cluster -e logs/{rule}.{wildcards}.cluster -J {rule}.{wildcards} -q normal -n {resources.cores} "
 use-singularity: true
 use-conda: true
-default-resources: [memory=200, cpus=1, threads=1, resource.cores=1] 
+default-resources: [memory=8000, cpus=1, cores=1] 

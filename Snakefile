@@ -33,4 +33,12 @@ BWA_INDEX_FILE =  ref_folder + "/" + GENOME_NAME + ".fa.sa"
 rule all:
     input: FASTQS
 
+rule clean:
+    shell:
+        """
+        rm -rf bams/
+        rm -rf cramlist/
+        rm -rf fastq/
+        """
+
 include: "workflow/cramtofastq.smk"

@@ -1,3 +1,3 @@
-base_dir: "/lustre/scratch119/casm/team163gv/vm11/GONIA/2020.03.Gonia.Dnmt3aR882H.ATACSeq"
-sample_file: "/lustre/scratch119/casm/team163gv/vm11/GONIA/2020.03.Gonia.Dnmt3aR882H.ATACSeq/samples.tsv"
-genome: "mm10"
+base_dir: "./"
+sample_file: "./samples.csv"
+genome: "Mus_musculus.GRCm38.68.dna.toplevel"
