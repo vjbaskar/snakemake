@@ -32,8 +32,9 @@ rule download_fa:
         gunzip < {output.fa}.gz > {output.fa}
         samtools faidx {output.fa}
         """
-
-
+# For a given sample there may be one or more cram files.
+# Convert these crams to bams
+# Put all the bam file names of the sample into a file called sample.merge.txt
 rule collatecrams:
     input:
         sample_folder = "data/{sample}",
@@ -51,9 +52,9 @@ rule collatecrams:
         done
         ls {input.sample_folder}/finalfiles/*.bam > {output}
         """
+# Merge the bam files
 
-
-rule cram2bam:
+rule mergebams:
     input:
         "bams/{sample}.merge.txt"
     output:
@@ -63,15 +64,15 @@ rule cram2bam:
         samtools merge -b {input} {output}
         """
 
+# Convert bam to fastq
+
 rule bam2fq:
     input:
         bamfile = "bams/{sample}.bam"
     output:
-        f1 = "fastq/{sample}_R1.fq.gz", f2 = "fastq/{sample}_R2.fq.gz", s = "fastq/{sample}_singletons.fq.gz", f = "fastq/{sample}.fq.gz"
+        f1 = "fastq/{sample}_R1.fq.gz", f2 = "fastq/{sample}_R2.fq.gz"
     shell:
         """
-        echo {input.bamfile} > {output.f1}
-        echo {input.bamfile} > {output.f2}
-        samtools fastq -1 {output.f1} -2 {output.f2} -o {output.f} -s {output.s} {input.bamfile} 
+        java -jar /picard.jar SamToFastq I={input.bamfile} F={output.f1} F2={output.f2}
         """
 

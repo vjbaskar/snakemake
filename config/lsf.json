@@ -5,9 +5,9 @@
         "nCPUs"     : "1",
         "memory"    : 8000,
         "resources" : "\"select[mem>8000] rusage[mem=8000] span[hosts=1]\"",
-        "name"      : "{rule}.{wildcards}",
-        "output"    : "logs/cluster/{rule}.{wildcards}.out",
-        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+        "name"      : "{rule}.{wildcards.sample}",
+        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
     },
 
 
@@ -17,9 +17,9 @@
         "nCPUs"     : "1",
         "memory"    : 2000,
         "resources" : "\"select[mem>2000] rusage[mem=2000] span[hosts=1]\"",
-        "name"      : "{rule}.{wildcards}",
-        "output"    : "logs/cluster/{rule}.{wildcards}.out",
-        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+        "name"      : "{rule}.{wildcards.sample}",
+        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
     },
         
     "sortbam" :
@@ -28,9 +28,9 @@
         "nCPUs"     : "1",
         "memory"    : 8000,
         "resources" : "\"select[mem>8000] rusage[mem=8000] span[hosts=1]\"",
-        "name"      : "{rule}.{wildcards}",
-        "output"    : "logs/cluster/{rule}.{wildcards}.out",
-        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+        "name"      : "{rule}.{wildcards.sample}",
+        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
     },
     
     "download_fa" :
@@ -39,9 +39,9 @@
         "nCPUs"     : "1",
         "memory"    : 500,
         "resources" : "\"select[mem>500] rusage[mem=500] span[hosts=1]\"",
-        "name"      : "{rule}.{wildcards}",
-        "output"    : "logs/cluster/{rule}.{wildcards}.out",
-        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+        "name"      : "{rule}.{wildcards.sample}",
+        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
     },
     
     "collatecrams" :
@@ -50,9 +50,31 @@
         "nCPUs"     : "1",
         "memory"    : 2000,
         "resources" : "\"select[mem>2000] rusage[mem=2000] span[hosts=1]\"",
-        "name"      : "{rule}.{wildcards}",
-        "output"    : "logs/cluster/{rule}.{wildcards}.out",
-        "error"     : "logs/cluster/{rule}.{wildcards}.err"
+        "name"      : "{rule}.{wildcards.sample}",
+        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
+    },
+
+    "mergebams" :
+    {
+        "queue"     : "normal",
+        "nCPUs"     : "1",
+        "memory"    : 8000,
+        "resources" : "\"select[mem>8000] rusage[mem=8000] span[hosts=1]\"",
+        "name"      : "{rule}.{wildcards.sample}",
+        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
+    },
+
+    "bam2fq" :
+    {
+        "queue"     : "normal",
+        "nCPUs"     : "1",
+        "memory"    : 2000,
+        "resources" : "\"select[mem>2000] rusage[mem=2000] span[hosts=1]\"",
+        "name"      : "{rule}.{wildcards.sample}",
+        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
     }
 
 }

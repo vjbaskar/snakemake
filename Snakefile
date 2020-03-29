@@ -6,14 +6,10 @@ import pandas
 The needed fields in config file are:
     sample_filename = "something.tsv"
     genome = "hg38" etc
-
-
 """
 sample_file = config["sample_file"]
-data = pandas.read_csv(sample_file,sep="\t")
-data.columns = ["sample_id","sample_name"]
-
-print(data.to_string())
+data = pandas.read_csv(sample_file)
+data.columns = ["sample_id","sample_name","condition"]
 
 ref_folder = "refs"
 SAMPLES = data['sample_id'].to_list()
@@ -21,7 +17,6 @@ SAMPLES = data['sample_id'].to_list()
 # Get the names of the final output files
 BAMS = expand("bams/{sample}.bam", sample = SAMPLES)
 FASTQS = expand(["fastq/{sample}_R1.fq.gz", "fastq/{sample}_R2.fq.gz"], sample = SAMPLES)
-print(FASTQS)
 #GENOME_NAME = "hg38"
 GENOME_NAME = config["genome"]
 print(f"Your genome = {GENOME_NAME}")
