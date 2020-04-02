@@ -15,7 +15,7 @@ ref_folder = "refs"
 SAMPLES = data['sample_id'].to_list()
 
 # Get the names of the final output files
-BAMS = expand("bams/{sample}.bam", sample = SAMPLES)
+BAMS = expand("align/{sample}.bam", sample = SAMPLES)
 FASTQS = expand(["fastq/{sample}_R1.fq.gz", "fastq/{sample}_R2.fq.gz"], sample = SAMPLES)
 #GENOME_NAME = "hg38"
 GENOME_NAME = config["genome"]
@@ -31,7 +31,7 @@ BWA_INDEX_FILE =  ref_folder + "/" + GENOME_NAME + ".fa.sa"
 
 # The main rule where the final output files are requested
 rule all:
-    input: FASTQS
+    input: BAMS
 
 rule clean:
     shell:
@@ -42,3 +42,4 @@ rule clean:
         """
 
 include: "workflow/cramtofastq.smk"
+include: "workflow/align.smk"
