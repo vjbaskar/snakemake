@@ -5,9 +5,9 @@
         "nCPUs"     : "1",
         "memory"    : 8000,
         "resources" : "\"select[mem>8000] rusage[mem=8000] span[hosts=1]\"",
-        "name"      : "{rule}.{wildcards.sample}",
-        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
-        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
+        "name"      : "{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards}.err"
     },
 
 
@@ -39,9 +39,9 @@
         "nCPUs"     : "1",
         "memory"    : 500,
         "resources" : "\"select[mem>500] rusage[mem=500] span[hosts=1]\"",
-        "name"      : "{rule}.{wildcards.sample}",
-        "output"    : "logs/cluster/{rule}.{wildcards.sample}.out",
-        "error"     : "logs/cluster/{rule}.{wildcards.sample}.err"
+        "name"      : "{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}.{wildcards}.out",
+        "error"     : "logs/cluster/{rule}.{wildcards}.err"
     },
     
     "collatecrams" :

@@ -1,4 +1,6 @@
-mkdir -p bams logs/cluster metrics refs cramlist
+#mkdir -p bams logs/cluster metrics refs cramlist
+
+fullrun(){
 snakemake --use-singularity \
     --jobs 999 \
     --printshellcmds \
@@ -6,4 +8,17 @@ snakemake --use-singularity \
     --cluster-config config/lsf.json \
     --configfile config/smk.yaml \
     --cluster " bsub -M {cluster.memory} -R {cluster.resources} -o {cluster.output} -e {cluster.error} -J {cluster.name} -q {cluster.queue} -n {cluster.nCPUs} " \
-    -p #-n #--report report.html  #-n #-s align.snk
+    -s bwa_align.smk \
+    -p $@ #-n #--report report.html  #-n #-s align.snk
+}
+
+localrun(){
+    snakemake --use-singularity \
+    --printshellcmds \
+    --rerun-incomplete \
+    --configfile config/smk.yaml \
+    -s bwa_align.smk \
+    -p $@ #-n #--report report.html  #-n #-s align.snk
+}
+
+fullrun
