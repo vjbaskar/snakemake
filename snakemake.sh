@@ -1,14 +1,22 @@
-#mkdir -p bams logs/cluster metrics refs cramlist
+#!/bin/bash
+
+# If you want use older clusterconfig use the following options
+# --cluster " bsub -M {cluster.memory} -R {cluster.resources} -o {cluster.output} -e {cluster.error} -J {cluster.name} -q {cluster.queue} -n {cluster.nCPUs} " \
+# --cluster-config config/lsf.json \
+
+
 
 fullrun(){
-snakemake --use-singularity \
+    snakemake --use-singularity \
     --jobs 999 \
     --printshellcmds \
     --rerun-incomplete \
     --configfile config/smk.yaml \
-    --cluster " bsub -M {cluster.memory} -R {cluster.resources} -o {cluster.output} -e {cluster.error} -J {cluster.name} -q {cluster.queue} -n {cluster.nCPUs} " \
-    -s bwa_align.smk \
+    --profile profile/lsf/ \
+    --restart-times 5 \
+    --jobname "snakejob.{name}.{jobid}" \
     -p $@ #-n #--report report.html  #-n #-s align.snk
+
 }
 
 localrun(){
@@ -16,8 +24,7 @@ localrun(){
     --printshellcmds \
     --rerun-incomplete \
     --configfile config/smk.yaml \
-    -s bwa_align.smk \
     -p $@ #-n #--report report.html  #-n #-s align.snk
 }
 
-fullrun
+fullrun -s bwa_align.smk

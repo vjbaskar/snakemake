@@ -29,6 +29,11 @@ rule download_fa:
         fa = GENOME_FA, fai = GENOME_FAI
     message:
         "Downloading genome files"
+    resources:
+        mem_mb=lambda wildcards, attempt: attempt * 1000,
+        cpus=1,
+        cores=1
+    threads: 1
     shell:
         """
         wget https://hgdownload.soe.ucsc.edu/goldenPath/{params.genome}/bigZips/{params.genome}.fa.gz -O {output.fa}.gz
@@ -46,6 +51,10 @@ rule bwa_index:
         index_sa = BWA_INDEX_FILE
     message:
         "Generating bwa index"
+    resources:
+        mem_mb=lambda wildcards, attempt: attempt * 8000,
+        cpus=1,
+        cores=1
     shell:
         """
         bwa index {input.fa}
@@ -61,9 +70,13 @@ rule align:
         index_sa = BWA_INDEX_FILE
     output:
         "bams/{sample}.raw.bam"
+    resources:
+        mem_mb=lambda wildcards, attempt: attempt * 4000,
+        cpus=1,
+        cores=1
     shell:
         """
-        bwa mem {input.fa} {input.f1} {input.f2} | samtools view -Sb - -o {output}
+        bwa mem -t {resources.cores} {input.fa} {input.f1} {input.f2} | samtools view -Sb - -o {output}
         """
 
 rule sortbam:
@@ -73,6 +86,11 @@ rule sortbam:
         "bams/{sample}.bam"
     shadow:
         "shallow"
+    resources:
+        mem_mb=lambda wildcards, attempt: attempt * 4000,
+        cpus=1,
+        cores=1
+    threads: 1
     shell:
         """
         mkdir -p metrics
